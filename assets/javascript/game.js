@@ -12,7 +12,7 @@ let randomLetter = alphabet[Math.floor(Math.random()*alphabet.length)];
 
 document.onkeyup = function(event) {
 
-    let userGuess = event.key;
+    let userGuess = (event.key).toLowerCase();
 
     // let userGuess = String.fromCharCode(event.keyCode).toLowerCase();
     // console.log(userGuesses.indexOf(userGuess));
@@ -47,7 +47,7 @@ document.onkeyup = function(event) {
             } 
             
             if (guessesLeft === 0) {
-                alert("You LOSE!");
+                alert("You LOSE! The winning letter was: " + randomLetter);
                 userLosses++;
                 guessesLeft = 10;
                 userGuesses = [];
