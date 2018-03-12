@@ -24,11 +24,6 @@ document.onkeyup = function(event) {
             alert("Please enter an alphabetical character only! No repeats!");
             return;
         } else if (userGuesses.indexOf(userGuess) === -1) {    
-            
-            // if (userGuesses.indexOf(userGuess) > 0) {
-            //     alert('repeated letter');
-            //     // return;
-            // }
 
             if (userGuess === randomLetter) {
                 alert('Winner!!!');
