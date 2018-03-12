@@ -3,51 +3,65 @@
 let userWins = 0;
 let userLosses = 0;
 let guessesLeft = 10;
-// let guessCount = 0;
 let userGuesses = [];
 let alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-// want random letter to not reset until game over
+
+// [^/A-a]
+
 let randomLetter = alphabet[Math.floor(Math.random()*alphabet.length)];
-// console.log(randomLetter);
-
-
 
 document.onkeyup = function(event) {
 
     let userGuess = event.key;
 
-    // if (typeof(userGuess) === "string") {
+    // let userGuess = String.fromCharCode(event.keyCode).toLowerCase();
+    // console.log(userGuesses.indexOf(userGuess));
     // set lowercase restriction?
 
-        if (userGuess === randomLetter) {
-            alert('winner!!!');
-            userWins++; 
-            userGuesses = [];
-            guessesLeft = 10;
-        } else if (userGuess !== randomLetter) {
-            guessesLeft--;
-            userGuesses.push(userGuess);
-        }
+        console.log(randomLetter);
 
-        if (guessesLeft === 0) {
-            alert("Sorry, you lose");
-            userLosses--;
-            guessesLeft = 10;
-        }
+        if (alphabet.indexOf(userGuess) === -1) {
+            alert("Please enter an alphabetical character only! No repeats!");
+            return;
+        } else if (userGuesses.indexOf(userGuess) === -1) {    
+            
+            // if (userGuesses.indexOf(userGuess) > 0) {
+            //     alert('repeated letter');
+            //     // return;
+            // }
 
-        document.getElementById("wins").textContent = userWins;
-        document.getElementById("losses").textContent = userLosses;
-        document.getElementById("guessesLeft").textContent = guessesLeft;
-        
+            if (userGuess === randomLetter) {
+                alert('Winner!!!');
+                userWins++; 
+                userGuesses = [];
+                guessesLeft = 10;
+                randomLetter = alphabet[Math.floor(Math.random()*alphabet.length)];
 
-        // for (i = 0; i < userGuesses.length; i++) {
-        //     console.log(userGuesses[i]);
+            } 
+            
+            if (userGuess !== randomLetter) {
+                guessesLeft--;
+                userGuesses.push(userGuess);
+                // console.log(userGuesses);
 
-        //     document.getElementById('userGuesses').textContent = userGuesses[i];
-        // }
+            } 
+            
+            if (guessesLeft === 0) {
+                alert("You LOSE!");
+                userLosses++;
+                guessesLeft = 10;
+                userGuesses = [];
+                randomLetter = alphabet[Math.floor(Math.random()*alphabet.length)];
 
-        // document.getElementById('userGuesses').textContent = userGuesses.push(userGuess);
+            };    
 
-    // }
+            document.getElementById("wins").textContent = userWins;
+            document.getElementById("losses").textContent = userLosses;
+            document.getElementById("guessesLeft").textContent = guessesLeft;
+            document.getElementById('userGuesses').textContent = userGuesses;
 
-}
+        } else {
+            alert('Double Letter Error!');
+        };
+
+};
